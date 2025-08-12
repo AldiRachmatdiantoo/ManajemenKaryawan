@@ -1,10 +1,11 @@
-sealed class Karyawan {
+
+sealed class TipeKaryawan {
     data class FullTime(
         val name: String,
         val email: String,
         var role: String?,
         val gaji: Int
-    ) : Karyawan()
+    ) : TipeKaryawan()
 
     data class Freelance(
         val name: String,
@@ -12,11 +13,11 @@ sealed class Karyawan {
         var role: String?,
         val jamKerja: Int,
         val gajiPerJam: Int
-    ) : Karyawan()
+    ) : TipeKaryawan()
 
     data class Manager(
         val name: String,
         val email: String,
         var role: String?
-        ) : Karyawan()
+        ) : TipeKaryawan()
 }
