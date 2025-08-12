@@ -26,8 +26,7 @@ fun checkNullOrBlank(text: String): String{
         return input
     }
 }
-fun checkTableSql(stmt: PreparedStatement, toCompareEquals: String, typeRowToGetFromTable: String, fillQuery: String): Boolean{
-    stmt.setString(1, fillQuery)
+fun checkTableSql(stmt: PreparedStatement, toCompareEquals: String, typeRowToGetFromTable: String): Boolean{
     val rs = stmt.executeQuery()
     if (rs.next()){
         val dataFromTable = rs.getString(typeRowToGetFromTable)

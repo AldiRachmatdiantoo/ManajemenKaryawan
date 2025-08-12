@@ -36,9 +36,10 @@ class Login {
         while (true) {
             val username = checkNullOrBlank("masukkan username: ")
             val stmtSelectUsername = conn.prepareStatement("SELECT * FROM users WHERE name = ?")
+            stmtSelectUsername.setString(1, username)
             val whatToCheck = "name"
 
-            val check = checkTableSql(stmtSelectUsername, username, whatToCheck, username)
+            val check = checkTableSql(stmtSelectUsername, username, whatToCheck)
             if (!check) {
                 println("username tidak ada!")
                 continue
@@ -51,9 +52,10 @@ class Login {
         while (true) {
             val password = checkNullOrBlank("masukkan password: ")
             val stmtSelectPassword = conn.prepareStatement("SELECT password FROM users WHERE name = ?")
+            stmtSelectPassword.setString(1, username)
             val whatToCheck = "password"
 
-            val check = checkTableSql(stmtSelectPassword, password, whatToCheck, username)
+            val check = checkTableSql(stmtSelectPassword, password, whatToCheck)
             if (!check) {
                 val remainingChance = chance()
                 println("password salah! sisa kesempatan login: $remainingChance")

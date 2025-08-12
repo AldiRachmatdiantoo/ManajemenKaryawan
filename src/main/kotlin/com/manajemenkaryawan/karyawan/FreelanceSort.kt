@@ -44,19 +44,20 @@ class FreelanceSort(parameterConn: Connection) {
         return
     }
     fun hapusKaryawanFreelance(){
-        val stmtDeleteSelectFreelance = conn.prepareStatement("SELECT name FROM users WHERE role = ?")
+        val stmtDeleteSelect = conn.prepareStatement("SELECT name FROM users WHERE role = ?")
+        stmtDeleteSelect.setString(1, role)
         val stmtDelete = conn.prepareStatement("DELETE FROM users WHERE name = ?")
         listKaryawanFreelance()
         print("Siapa yang ingin anda pecat? ")
         val pecatWho = readln()
-        val checkName = checkTableSql(stmtDeleteSelectFreelance, pecatWho, "name", role)
+        val checkName = checkTableSql(stmtDeleteSelect, pecatWho, "name")
         if (!checkName) return println("\nNama tidak ada!")
 
         //jika ada
         stmtDelete.setString(1, pecatWho)
         stmtDelete.executeUpdate()
         stmtDelete.close()
-        stmtDeleteSelectFreelance.close()
+        stmtDeleteSelect.close()
         println("\nBerhasil memecat!")
         return
     }
