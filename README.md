@@ -17,7 +17,26 @@ Mendukung fitur login, dashboard interaktif, serta pengelolaan karyawan berdasar
 ---
 
 ## Struktur Proyek
-src/main/kotlin/ │ ├── Main.kt ├── Start.kt ├── TipeKaryawan.kt │ ├── com/manajemenkaryawan/auth/ │ └── Login.kt │ ├── com/manajemenkaryawan/connection/ │ └── DatabaseConnection.kt │ ├── com/manajemenkaryawan/dashboard/ │ ├── Menu.kt │ ├── OrganizeKaryawan.kt │ └── Profile.kt │ └── com/manajemenkaryawan/karyawan/ ├── FreelanceSort.kt └── FullTimeSort.kt
+src/main/kotlin/
+│
+├── Main.kt 
+├── Start.kt 
+├── TipeKaryawan.kt 
+│
+├── com/manajemenkaryawan/auth/
+│   └── Login.kt 
+│
+├── com/manajemenkaryawan/connection/
+│   └── DatabaseConnection.kt
+│
+├── com/manajemenkaryawan/dashboard/
+│   ├── Menu.kt
+│   ├── OrganizeKaryawan.kt
+│   └── Profile.kt
+│
+└── com/manajemenkaryawan/karyawan/
+    ├── FreelanceSort.kt
+    └── FullTimeSort.kt
 
 ---
 
