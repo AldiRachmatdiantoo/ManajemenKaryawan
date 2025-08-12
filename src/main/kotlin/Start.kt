@@ -1,5 +1,10 @@
+import com.manajemenkaryawan.auth.Login
+
 class Start {
     fun start(){
-        println("yes")
+        while (true) {
+            Login().loginAcc()
+            break
+        }
     }
 }
