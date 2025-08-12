@@ -1,11 +1,10 @@
 package com.manajemenkaryawan.dashboard
 import TipeKaryawan
 import checkList
-import com.manajemenkaryawan.connection.DatabaseConnection
 import java.sql.Connection
 
-class Menu(db: DatabaseConnection, conn: Connection) {
-    val organize = OrganizeKaryawan(db, conn)
+class Menu(conn: Connection) {
+    val organize = OrganizeKaryawan(conn)
     val listmenu = mutableListOf(
         "tambah karyawan",
         "list karyawan",
@@ -23,7 +22,7 @@ class Menu(db: DatabaseConnection, conn: Connection) {
                     continue
                 }
                 listmenu[1] -> {
-                    organize.listKaryawan(user)
+                    organize.listKaryawan()
                     continue
                 }
                 listmenu[2] -> {

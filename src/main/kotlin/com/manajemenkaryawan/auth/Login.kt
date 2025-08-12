@@ -24,7 +24,7 @@ class Login {
                 val checkEmail = checkEmail(checkUsername)
                 val manager = TipeKaryawan.Manager(checkUsername, checkEmail, null)
                 manager.role = manager::class.simpleName?.uppercase()
-                Menu(db, conn).menu(manager)
+                Menu(conn).menu(manager)
                 return
 
             }
