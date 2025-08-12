@@ -18,5 +18,5 @@ sealed class Karyawan {
         val name: String,
         val email: String,
         var role: String?
-        )
+        ) : Karyawan()
 }
