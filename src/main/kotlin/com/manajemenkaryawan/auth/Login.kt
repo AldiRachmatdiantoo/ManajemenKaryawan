@@ -17,12 +17,13 @@ class Login {
     fun loginAcc(){
         while (true) {
             val checkUsername = checkUsername()
-            if (checkPassword()){
+            if (checkPassword(checkUsername)){
 
                 val checkEmail = checkEmail(checkUsername)
                 val manager = Karyawan.Manager(checkUsername, checkEmail, null)
                 manager.role = manager::class.simpleName?.uppercase()
                 println(manager)
+                return
 
             }
 
@@ -35,7 +36,7 @@ class Login {
             val stmtSelectUsername = conn.prepareStatement("SELECT * FROM users WHERE name = ?")
             val whatToCheck = "name"
 
-            val check = checkTableSql(stmtSelectUsername, username, whatToCheck)
+            val check = checkTableSql(stmtSelectUsername, username, whatToCheck, username)
             if (!check) {
                 println("username tidak ada!")
                 continue
@@ -44,13 +45,13 @@ class Login {
             }
         }
     }
-    fun checkPassword(): Boolean {
+    fun checkPassword(username: String): Boolean {
         while (true) {
             val password = checkNullOrBlank("masukkan password: ")
             val stmtSelectPassword = conn.prepareStatement("SELECT password FROM users WHERE name = ?")
             val whatToCheck = "password"
 
-            val check = checkTableSql(stmtSelectPassword, password, whatToCheck)
+            val check = checkTableSql(stmtSelectPassword, password, whatToCheck, username)
             if (!check) {
                 val remainingChance = chance()
                 println("password salah! sisa kesempatan login: $remainingChance")
