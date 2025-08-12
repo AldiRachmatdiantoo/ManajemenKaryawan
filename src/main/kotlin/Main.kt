@@ -37,6 +37,19 @@ fun checkTableSql(stmt: PreparedStatement, input: String, whatToCheck: String, w
     }
         return false
 }
+fun <T>checkList(text: String, judul: String, list: MutableList<T>): String{
+    while (true){
+        println("\n=====${judul.uppercase()}=====")
+        list.forEachIndexed { index, value ->
+            println("${index+1}.$value")
+        }
+        print(text)
+        val input = readln().lowercase()
+        if (list.any { it == input }) return input
+        println("Error! tolong pilih sesuai list!")
+        continue
+    }
+}
 var chance = 2
 fun chance(): Int{
     return chance--

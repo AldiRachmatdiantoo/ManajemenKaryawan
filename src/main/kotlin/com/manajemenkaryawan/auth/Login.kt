@@ -5,8 +5,10 @@ import checkNullOrBlank
 import checkTableSql
 import chance
 import kotlin.system.exitProcess
+import com.manajemenkaryawan.dashboard.Menu
 
 class Login {
+
     //connection
     val db = DatabaseConnection(
         "jdbc:mysql://localhost:3306/manajemen_karyawan",
@@ -20,9 +22,9 @@ class Login {
             if (checkPassword(checkUsername)){
 
                 val checkEmail = checkEmail(checkUsername)
-                val manager = Karyawan.Manager(checkUsername, checkEmail, null)
+                val manager = TipeKaryawan.Manager(checkUsername, checkEmail, null)
                 manager.role = manager::class.simpleName?.uppercase()
-                println(manager)
+                Menu(db, conn).menu(manager)
                 return
 
             }
@@ -57,6 +59,8 @@ class Login {
                 println("password salah! sisa kesempatan login: $remainingChance")
                 if (remainingChance == 0){
                     println("\nkesempatan habis! keluar dari program..")
+                    conn.close()
+                    stmtSelectPassword.close()
                     exitProcess(0)
                 }
                 continue
