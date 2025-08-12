@@ -26,12 +26,12 @@ fun checkNullOrBlank(text: String): String{
         return input
     }
 }
-fun checkTableSql(stmt: PreparedStatement, input: String, whatToCheck: String, whereInput: String): Boolean{
-    stmt.setString(1, whereInput)
+fun checkTableSql(stmt: PreparedStatement, toCompareEquals: String, typeRowToGetFromTable: String, fillQuery: String): Boolean{
+    stmt.setString(1, fillQuery)
     val rs = stmt.executeQuery()
     if (rs.next()){
-        val dataFromTable = rs.getString(whatToCheck)
-        if (dataFromTable == input){
+        val dataFromTable = rs.getString(typeRowToGetFromTable)
+        if (dataFromTable == toCompareEquals){
             return true
         }
     }

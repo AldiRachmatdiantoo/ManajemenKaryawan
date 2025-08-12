@@ -43,18 +43,20 @@ class FullTimeSort(parameterConn: Connection) {
         return
     }
     fun hapusKaryawanFullTime() {
-        val stmtDeleteSelect = conn.prepareStatement("SELECT * FROM users WHERE name = ?")
+        val stmtDeleteSelect = conn.prepareStatement("SELECT name FROM users WHERE role = ?")
         val stmtDelete = conn.prepareStatement("DELETE FROM users WHERE name = ?")
         listKaryawanFullTime()
         print("Siapa yang ingin anda pecat? ")
         val pecatWho = readln()
-        val checkName = checkTableSql(stmtDeleteSelect, pecatWho, "name", pecatWho)
+        val checkName = checkTableSql(stmtDeleteSelect, pecatWho, "name", role)
         if (!checkName) return println("\nNama tidak ada!")
 
         //jika ada
         stmtDelete.setString(1, pecatWho)
         stmtDelete.executeUpdate()
-        println("Berhasil memecat!")
+        stmtDelete.close()
+        stmtDeleteSelect.close()
+        println("\nBerhasil memecat!")
         return
     }
 }
