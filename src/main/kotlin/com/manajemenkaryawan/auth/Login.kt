@@ -24,8 +24,22 @@ class Login {
                 val checkEmail = checkEmail(checkUsername)
                 val manager = TipeKaryawan.Manager(checkUsername, checkEmail, null)
                 manager.role = manager::class.simpleName?.uppercase()
-                if (manager.role != "MANAGER") return
-                Menu(conn).menu(manager)
+                val stmtSelectCheckRole = conn.prepareStatement("SELECT role FROM users WHERE NAME = ?")
+                stmtSelectCheckRole.setString(1, checkUsername)
+                val rs = stmtSelectCheckRole.executeQuery()
+                if (rs.next()){
+                    val userRole = rs.getString("role")
+                    when(userRole){
+                        "MANAGER" -> {
+                            Menu(conn).menu(manager)
+                            return
+                        }
+                        else -> {
+                            println("Anda bukan manager!")
+                            return
+                        }
+                    }
+                }
                 return
 
             }
