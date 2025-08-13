@@ -24,6 +24,7 @@ class Login {
                 val checkEmail = checkEmail(checkUsername)
                 val manager = TipeKaryawan.Manager(checkUsername, checkEmail, null)
                 manager.role = manager::class.simpleName?.uppercase()
+                if (manager.role != "MANAGER") return
                 Menu(conn).menu(manager)
                 return
 
